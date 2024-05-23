@@ -3,20 +3,19 @@ import '@babylonjs/loaders';
 import las from "@/assets/model/las.obj";
 import water_drop_down from "@/assets/model/water_drop_down.glb";
 
+const input = document.querySelector('#input')
+input.addEventListener('change', function(){
+    console.log(this.files)
+    const reader = new FileReader()
+    reader.addEventListener('load', function () {
+        console.log(reader.result)
+    })
+    reader.readAsArrayBuffer(this.files[0])
+})
 const canvas = document.querySelector('#renderCanvas')
 const engine = new BABYLON.Engine(canvas)
 let createScene = async function () {
     const scene = new BABYLON.Scene(engine)
-
-
-    // window.fetch("http://111.175.89.142:7742/business/cimApi/model/list",{
-    //     method:'POST',
-    //     body:{
-    //         "projectId": 1138770048328925184
-    //     }
-    // }).then((r)=>{
-    //     console.log(r)
-    // })
 
     let linesX = BABYLON.MeshBuilder.CreateLines("lines", { points: [new BABYLON.Vector3(0, 0, 0), new BABYLON.Vector3(10000, 0, 0)], updatable: true }, scene);
     linesX.color = new BABYLON.Color3(1, 0, 0);
